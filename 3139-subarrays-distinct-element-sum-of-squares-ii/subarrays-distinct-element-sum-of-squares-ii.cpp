@@ -28,6 +28,7 @@ public:
 
             self(self,node*2,l,mid,ql,qr,val);
             self(self,node*2+1,mid+1,r,ql,qr,val);
+
             sum[node]=(sum[node*2]+sum[node*2+1])%MOD;
             sq[node]=(sq[node*2]+sq[node*2+1])%MOD;
         };

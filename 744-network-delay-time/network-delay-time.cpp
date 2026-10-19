@@ -46,7 +46,9 @@ public:
         for(int i = 1; i <= n; i++)
             ans = max(ans, result[i]);
         
-	return ans == INT_MAX ? -1 : ans;
+	//return ans == INT_MAX ? -1 : ans;
+    if(ans==INT_MAX) return -1;
+    else return ans;
         
     }
 };

@@ -1,30 +1,53 @@
 class Solution {
 public:
-        int findBound(vector<int>& nums, int target, bool findFirst) {
-        int l = 0, r = (int)nums.size() - 1;
-        int bound = -1;
-        while (l <= r) {
+    int findRightMost(vector<int>& nums, int target, int n) {
+        int l = 0, r = n - 1;
+        int right_most = -1;
+
+        while(l <= r) {
             int mid = l + (r - l) / 2;
-            if (nums[mid] == target) {
-                bound = mid; // Jeb me save kar lo!
-                if (findFirst) {
-                    r = mid - 1; // Leftmost ke liye Left me talash jari rakho
-                } else {
-                    l = mid + 1; // Rightmost ke liye Right me talash jari rakho
-                }
-            } else if (nums[mid] < target) {
+
+            if(nums[mid] == target) {
+                right_most = mid;
                 l = mid + 1;
-            } else {
+            }
+            else if(nums[mid] < target) {
+                l = mid + 1;
+            }
+            else {
                 r = mid - 1;
             }
         }
-        return bound;
+        return right_most;
     }
+
+    int findLeftMost(vector<int>& nums, int target, int n) {
+        int l = 0, r = n - 1;
+        int left_most = -1;
+
+        while(l <= r) {
+            int mid = l + (r - l) / 2;
+
+            if(nums[mid] == target) {
+                left_most = mid;
+                r = mid - 1;
+            }
+            else if(nums[mid] < target) {
+                l = mid + 1;
+            }
+            else {
+                r = mid - 1;
+            }
+        }
+        return left_most;
+    }
+
     vector<int> searchRange(vector<int>& nums, int target) {
-         int first = findBound(nums, target, true);
-        if (first == -1) return {-1, -1}; // Agar first hi nahi mila toh target array me hai hi nahi!
-        int last = findBound(nums, target, false);
-        return {first, last};
-        
+        int n = nums.size();
+
+        int left_most = findLeftMost(nums, target, n);
+        int right_most = findRightMost(nums, target, n);
+
+        return {left_most, right_most};
     }
 };
